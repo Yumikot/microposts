@@ -1,10 +1,11 @@
 class UsersController < ApplicationController
-    before_action :logged_in_user, only: [:edit, :update]
+    before_action :correct_user, only: [:edit, :update]
     
     def edit
-         @user = User.find(params[:id])
-  end
-     def update
+    end
+    
+    
+    def update
     @user = User.find(params[:id])
     if @user.update(user_params)
       flash[:success] = "Updated your Plofile"
@@ -32,6 +33,13 @@ class UsersController < ApplicationController
   end
 
   private
+   def correct_user
+  @user = User.find(params[:id])
+  
+  unless current_user == @user
+      redirect_to root_url
+    end     
+  end
 
   def user_params
     params.require(:user).permit(:name, :email, :place, :password,
