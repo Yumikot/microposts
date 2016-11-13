@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   private
  
- user-profile
+
   def logged_in_user
     unless logged_in?
       store_location
