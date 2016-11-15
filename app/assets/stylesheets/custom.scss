@@ -127,14 +127,22 @@ aside {
       letter-spacing: -1px;
       margin-bottom: 3px;
       margin-top: 0px;
+      
     }
   }
 }
 
-.gravatar {
-  float: left;
-  margin-right: 10px;
+
+ul li .gravatar{
+  float:none;
+  display:block;
 }
+ul li{
+  list-style:none;
+  margin-bottom:15px;
+ 
+}
+
 /* microposts */
 
 .microposts {
