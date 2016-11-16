@@ -31,5 +31,7 @@ has_many :following_users, through: :following_relationships, source: :followed
   def following?(other_user)
     following_users.include?(other_user)
   end
-
+def feed_items
+    Micropost.where(user_id: following_user_ids + [self.id])
+  end
 end
