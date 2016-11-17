@@ -1,12 +1,12 @@
 <h1>Follower</h1>
 <% if @users.present? %>
   <ul>
-<% @users.each do |user| %>
-  <li>
-  <%= link_to gravatar_for(user, size: 50), user %>
-  <%= link_to user.name, user %>
-  </li>
-<% end %>
-</ul>
+    <% @users.each do |user| %>
+      <li>
+        <%= link_to gravatar_for(user, size: 50), user %>
+        <%= link_to user.name, user %>
+      </li>
+    <% end %>
+  </ul> <%= paginate @users %>
 <% end %>
 

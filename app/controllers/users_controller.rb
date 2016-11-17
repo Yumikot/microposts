@@ -3,10 +3,9 @@ class UsersController < ApplicationController
    
   def show
     @user = User.find(params[:id])
-    @microposts = @user.microposts.order(created_at: :desc)
+    @microposts = @user.microposts.order(created_at: :desc).page(params[:page])
   end
-  
-    
+
   def edit
   end
     
@@ -34,25 +33,30 @@ class UsersController < ApplicationController
     end
   end
   
-def followings
-  @user = User.find(params[:id])
-  @users = @user.following_users
-end
-
-def followers
-  @user = User.find(params[:id])
-  @users = @user.follower_users
-    
-end
-
-  private
-    def correct_user
-        @user = User.find(params[:id])
-  
-        unless current_user == @user
-          redirect_to root_url
-        end     
+  def followings
+    @user = User.find(params[:id])
+    @users = @user.following_users.page(params[:page])
   end
+  
+  def followers
+    @user = User.find(params[:id])
+    @users = @user.follower_users.page(params[:page])
+  end
+
+  def favorites
+    @user = User.find(params[:id])
+  end
+	   
+  private
+
+  def correct_user
+    @user = User.find(params[:id])
+
+    unless current_user == @user
+      redirect_to root_url
+    end
+  end     
+
 
   def user_params
     params.require(:user).permit(:name, :email, :password,
