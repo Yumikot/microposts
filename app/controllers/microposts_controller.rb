@@ -21,6 +21,16 @@ class MicropostsController < ApplicationController
     flash[:success] = "Micropost deleted"
     redirect_to request.referrer || root_url
   end
+   def retweet
+    original = Micropost.find(params[:id])
+    @retweet = current_user.microposts.build(original_id: original.id)
+    @retweet.content = original.content
+      if @retweet.save
+       redirect_to current_user
+    else
+      redirect_to :back
+    end
+  end
   
   private
   def micropost_params
